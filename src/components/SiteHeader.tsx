@@ -29,14 +29,14 @@ export function SiteHeader() {
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Alumni × Students</div>
           </div>
         </Link>
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden max-w-[55%] items-center gap-0.5 overflow-x-auto md:flex">
           {NAV.map((item) => {
             const active = loc.pathname === item.to;
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`rounded-full px-4 py-2 text-sm transition-colors ${
+                className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition-colors ${
                   active
                     ? "bg-primary/15 text-primary"
                     : "text-muted-foreground hover:bg-surface-2 hover:text-foreground"

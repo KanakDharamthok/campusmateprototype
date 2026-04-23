@@ -11,9 +11,9 @@ import { Badge } from "@/components/ui/badge";
 export const Route = createFileRoute("/stories")({
   head: () => ({
     meta: [
-      { title: "Career Stories & Skill Trees — Campus Mitra" },
+      { title: "Career Stories & Skill Trees — CampusMate" },
       { name: "description", content: "Internship-to-job conversion stories, full career timelines, and interactive skill trees you can compare with mentors." },
-      { property: "og:title", content: "Career Stories & Skill Trees — Campus Mitra" },
+      { property: "og:title", content: "Career Stories & Skill Trees — CampusMate" },
       { property: "og:description", content: "Storytelling profiles with skill graphs and conversion playbooks." },
     ],
   }),

@@ -29,10 +29,10 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Campus Mitra — Alumni Journeys, Student Opportunities" },
+      { title: "CampusMate — Alumni Journeys, Student Opportunities" },
       { name: "description", content: "A signature alumni-student platform: Career Journey Map, Opportunity Heatmap, Career GPS, Referral Marketplace, and Alumni Office Hours." },
-      { name: "author", content: "Campus Mitra" },
-      { property: "og:title", content: "Campus Mitra — Alumni Journeys, Student Opportunities" },
+      { name: "author", content: "CampusMate" },
+      { property: "og:title", content: "CampusMate — Alumni Journeys, Student Opportunities" },
       { property: "og:description", content: "Where alumni journeys become student opportunities." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

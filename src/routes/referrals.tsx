@@ -9,9 +9,9 @@ import { ALUMNI, OPPORTUNITIES, CITIES } from "@/lib/mockData";
 export const Route = createFileRoute("/referrals")({
   head: () => ({
     meta: [
-      { title: "Referral Marketplace · Campus Mitra" },
+      { title: "Referral Marketplace · CampusMate" },
       { name: "description", content: "Alumni post referral-ready opportunities. Apply with a short intent note. Track every referral transparently." },
-      { property: "og:title", content: "Referral Marketplace · Campus Mitra" },
+      { property: "og:title", content: "Referral Marketplace · CampusMate" },
       { property: "og:description", content: "Real referrals from real alumni — transparent and trackable." },
     ],
   }),

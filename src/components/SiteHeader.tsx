@@ -25,7 +25,7 @@ export function SiteHeader() {
             <Compass className="h-5 w-5 text-primary-foreground" />
           </div>
           <div className="leading-tight">
-            <div className="font-display text-lg font-semibold">Campus Mitra</div>
+            <div className="font-display text-lg font-semibold">CampusMate</div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Alumni × Students</div>
           </div>
         </Link>

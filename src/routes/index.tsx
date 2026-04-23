@@ -9,9 +9,9 @@ import { ALUMNI, OPPORTUNITIES, STATS } from "@/lib/mockData";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Campus Mitra — Where alumni journeys become student opportunities" },
+      { title: "CampusMate — Where alumni journeys become student opportunities" },
       { name: "description", content: "Career Journey Map, Opportunity Heatmap, Career GPS, Referral Marketplace, Alumni Office Hours — five signature features built for the next generation." },
-      { property: "og:title", content: "Campus Mitra — Where alumni journeys become student opportunities" },
+      { property: "og:title", content: "CampusMate — Where alumni journeys become student opportunities" },
       { property: "og:description", content: "A signature alumni-student platform with five flagship features." },
     ],
   }),
@@ -88,7 +88,7 @@ function Home() {
                 <span className="text-gradient-gold">turned into student maps.</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-                Campus Mitra turns scattered alumni stories into living, navigable
+                CampusMate turns scattered alumni stories into living, navigable
                 maps — so every student knows where they could go, and how others
                 got there.
               </p>

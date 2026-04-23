@@ -9,9 +9,9 @@ import { OPPORTUNITIES, CITIES, type Opportunity } from "@/lib/mockData";
 export const Route = createFileRoute("/heatmap")({
   head: () => ({
     meta: [
-      { title: "Opportunity Heatmap · Campus Mitra" },
+      { title: "Opportunity Heatmap · CampusMate" },
       { name: "description", content: "See internship and job density across Indian cities. Filter by role and experience level to decide where to apply." },
-      { property: "og:title", content: "Opportunity Heatmap · Campus Mitra" },
+      { property: "og:title", content: "Opportunity Heatmap · CampusMate" },
       { property: "og:description", content: "Where the jobs are — visualised by city, role and level." },
     ],
   }),

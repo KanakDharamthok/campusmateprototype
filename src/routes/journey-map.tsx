@@ -10,9 +10,9 @@ import { ALUMNI, CITIES, type Alumni } from "@/lib/mockData";
 export const Route = createFileRoute("/journey-map")({
   head: () => ({
     meta: [
-      { title: "Career Journey Map · Campus Mitra" },
+      { title: "Career Journey Map · CampusMate" },
       { name: "description", content: "Trace alumni journeys from first job to current city. Click any path to read the story behind each transition." },
-      { property: "og:title", content: "Career Journey Map · Campus Mitra" },
+      { property: "og:title", content: "Career Journey Map · CampusMate" },
       { property: "og:description", content: "Trace alumni journeys city by city, year by year." },
     ],
   }),

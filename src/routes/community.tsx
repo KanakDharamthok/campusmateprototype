@@ -13,9 +13,9 @@ import { Textarea } from "@/components/ui/textarea";
 export const Route = createFileRoute("/community")({
   head: () => ({
     meta: [
-      { title: "Community — Ask Alumni, City Chapters, Reputation — Campus Mitra" },
+      { title: "Community — Ask Alumni, City Chapters, Reputation — CampusMate" },
       { name: "description", content: "Ask verified alumni real questions, join your city chapter, and climb a reputation board built on outcomes — not likes." },
-      { property: "og:title", content: "Community — Campus Mitra" },
+      { property: "og:title", content: "Community — CampusMate" },
       { property: "og:description", content: "Ask Alumni, City Chapters, Reputation by Impact." },
     ],
   }),

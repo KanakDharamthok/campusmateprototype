@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ReferralsRouteImport } from './routes/referrals'
+import { Route as OfficeHoursRouteImport } from './routes/office-hours'
+import { Route as JourneyMapRouteImport } from './routes/journey-map'
+import { Route as HeatmapRouteImport } from './routes/heatmap'
+import { Route as CareerGpsRouteImport } from './routes/career-gps'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ReferralsRoute = ReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfficeHoursRoute = OfficeHoursRouteImport.update({
+  id: '/office-hours',
+  path: '/office-hours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JourneyMapRoute = JourneyMapRouteImport.update({
+  id: '/journey-map',
+  path: '/journey-map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeatmapRoute = HeatmapRouteImport.update({
+  id: '/heatmap',
+  path: '/heatmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareerGpsRoute = CareerGpsRouteImport.update({
+  id: '/career-gps',
+  path: '/career-gps',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,102 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/career-gps': typeof CareerGpsRoute
+  '/heatmap': typeof HeatmapRoute
+  '/journey-map': typeof JourneyMapRoute
+  '/office-hours': typeof OfficeHoursRoute
+  '/referrals': typeof ReferralsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/career-gps': typeof CareerGpsRoute
+  '/heatmap': typeof HeatmapRoute
+  '/journey-map': typeof JourneyMapRoute
+  '/office-hours': typeof OfficeHoursRoute
+  '/referrals': typeof ReferralsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/career-gps': typeof CareerGpsRoute
+  '/heatmap': typeof HeatmapRoute
+  '/journey-map': typeof JourneyMapRoute
+  '/office-hours': typeof OfficeHoursRoute
+  '/referrals': typeof ReferralsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/career-gps'
+    | '/heatmap'
+    | '/journey-map'
+    | '/office-hours'
+    | '/referrals'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/career-gps'
+    | '/heatmap'
+    | '/journey-map'
+    | '/office-hours'
+    | '/referrals'
+  id:
+    | '__root__'
+    | '/'
+    | '/career-gps'
+    | '/heatmap'
+    | '/journey-map'
+    | '/office-hours'
+    | '/referrals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CareerGpsRoute: typeof CareerGpsRoute
+  HeatmapRoute: typeof HeatmapRoute
+  JourneyMapRoute: typeof JourneyMapRoute
+  OfficeHoursRoute: typeof OfficeHoursRoute
+  ReferralsRoute: typeof ReferralsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/referrals': {
+      id: '/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof ReferralsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/office-hours': {
+      id: '/office-hours'
+      path: '/office-hours'
+      fullPath: '/office-hours'
+      preLoaderRoute: typeof OfficeHoursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journey-map': {
+      id: '/journey-map'
+      path: '/journey-map'
+      fullPath: '/journey-map'
+      preLoaderRoute: typeof JourneyMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/heatmap': {
+      id: '/heatmap'
+      path: '/heatmap'
+      fullPath: '/heatmap'
+      preLoaderRoute: typeof HeatmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/career-gps': {
+      id: '/career-gps'
+      path: '/career-gps'
+      fullPath: '/career-gps'
+      preLoaderRoute: typeof CareerGpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +157,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CareerGpsRoute: CareerGpsRoute,
+  HeatmapRoute: HeatmapRoute,
+  JourneyMapRoute: JourneyMapRoute,
+  OfficeHoursRoute: OfficeHoursRoute,
+  ReferralsRoute: ReferralsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

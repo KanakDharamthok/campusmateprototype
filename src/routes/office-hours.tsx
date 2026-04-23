@@ -9,9 +9,9 @@ import { OFFICE_HOURS, ALUMNI } from "@/lib/mockData";
 export const Route = createFileRoute("/office-hours")({
   head: () => ({
     meta: [
-      { title: "Alumni Office Hours · Campus Mitra" },
+      { title: "Alumni Office Hours · CampusMate" },
       { name: "description", content: "Weekly live slots where alumni take student questions. Career switches, higher studies, startups, interview prep." },
-      { property: "og:title", content: "Alumni Office Hours · Campus Mitra" },
+      { property: "og:title", content: "Alumni Office Hours · CampusMate" },
       { property: "og:description", content: "60 minutes with someone who walked the path before you." },
     ],
   }),

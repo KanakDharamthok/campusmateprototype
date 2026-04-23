@@ -3,7 +3,7 @@ export function SiteFooter() {
     <footer className="mt-24 border-t border-border/60 bg-surface/40">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:grid-cols-4 md:px-8">
         <div>
-          <h3 className="font-display text-xl">Campus Mitra</h3>
+          <h3 className="font-display text-xl">CampusMate</h3>
           <p className="mt-3 text-sm text-muted-foreground">
             Where alumni journeys become student opportunities.
           </p>
@@ -37,7 +37,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border/60 px-4 py-5 text-center text-xs text-muted-foreground md:px-8">
-        Prototype build · Built with care for the Campus Mitra community.
+        Prototype build · Built with care for the CampusMate community.
       </div>
     </footer>
   );

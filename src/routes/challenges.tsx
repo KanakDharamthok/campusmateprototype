@@ -13,9 +13,9 @@ import { Progress } from "@/components/ui/progress";
 export const Route = createFileRoute("/challenges")({
   head: () => ({
     meta: [
-      { title: "Micro-Mentorship Challenges & Hidden Alerts — Campus Mitra" },
+      { title: "Micro-Mentorship Challenges & Hidden Alerts — CampusMate" },
       { name: "description", content: "7 and 14-day alumni-led cohorts: resume, DSA, interviews. Plus hidden opportunity alerts for verified members." },
-      { property: "og:title", content: "Micro-Mentorship Challenges — Campus Mitra" },
+      { property: "og:title", content: "Micro-Mentorship Challenges — CampusMate" },
       { property: "og:description", content: "Cohort-based challenges led by alumni." },
     ],
   }),

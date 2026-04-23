@@ -12,9 +12,9 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/mentors")({
   head: () => ({
     meta: [
-      { title: "Mentor Near Me — Campus Mitra" },
+      { title: "Mentor Near Me — CampusMate" },
       { name: "description", content: "Find alumni mentors in your city or nearby — open for guidance, available for coffee chats and campus visits." },
-      { property: "og:title", content: "Mentor Near Me — Campus Mitra" },
+      { property: "og:title", content: "Mentor Near Me — CampusMate" },
       { property: "og:description", content: "Local alumni mentors available for guidance and meetups." },
     ],
   }),

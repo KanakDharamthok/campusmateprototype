@@ -9,9 +9,9 @@ import { ALUMNI, SKILL_PATHS, type Opportunity } from "@/lib/mockData";
 export const Route = createFileRoute("/career-gps")({
   head: () => ({
     meta: [
-      { title: "Career GPS · Campus Mitra" },
+      { title: "Career GPS · CampusMate" },
       { name: "description", content: "Tell us your skills, year, and interests. We chart your next 3 career steps based on real alumni journeys." },
-      { property: "og:title", content: "Career GPS · Campus Mitra" },
+      { property: "og:title", content: "Career GPS · CampusMate" },
       { property: "og:description", content: "Personalised career path recommendations from real alumni data." },
     ],
   }),

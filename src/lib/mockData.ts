@@ -1,4 +1,4 @@
-// Mock data for Campus Mitra prototype — alumni, opportunities, mentors, etc.
+// Mock data for CampusMate prototype — alumni, opportunities, mentors, etc.
 
 export type City = {
   name: string;

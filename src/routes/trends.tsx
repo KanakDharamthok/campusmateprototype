@@ -13,9 +13,9 @@ import { Progress } from "@/components/ui/progress";
 export const Route = createFileRoute("/trends")({
   head: () => ({
     meta: [
-      { title: "Migration Trends & Skill Gap — Campus Mitra" },
+      { title: "Migration Trends & Skill Gap — CampusMate" },
       { name: "description", content: "Explore alumni migration corridors by branch and batch, and find your skill gap to a target role." },
-      { property: "og:title", content: "Migration Trends & Skill Gap — Campus Mitra" },
+      { property: "og:title", content: "Migration Trends & Skill Gap — CampusMate" },
       { property: "og:description", content: "City-to-city career corridors and skill gap analysis." },
     ],
   }),

@@ -3,11 +3,16 @@ import { Compass } from "lucide-react";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/journey-map", label: "Journey Map" },
-  { to: "/heatmap", label: "Opportunity Heatmap" },
+  { to: "/journey-map", label: "Journey" },
+  { to: "/heatmap", label: "Heatmap" },
+  { to: "/trends", label: "Trends" },
   { to: "/career-gps", label: "Career GPS" },
+  { to: "/mentors", label: "Mentors" },
   { to: "/referrals", label: "Referrals" },
   { to: "/office-hours", label: "Office Hours" },
+  { to: "/challenges", label: "Challenges" },
+  { to: "/community", label: "Community" },
+  { to: "/stories", label: "Stories" },
 ] as const;
 
 export function SiteHeader() {

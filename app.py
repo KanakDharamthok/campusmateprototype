@@ -64,6 +64,22 @@ def inject_lovable_styles():
     """, unsafe_allow_html=True)
 
 inject_lovable_styles()
+
+def draw_referral_card(role, company, user, description):
+    st.markdown(f"""
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 700; font-size: 1.1rem; color: #0f172a;">{role}</span>
+                <span style="background: #eef2ff; color: #4f46e5; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">{company}</span>
+            </div>
+            <div style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">
+                Posted by <b>{user}</b>
+            </div>
+            <div style="color: #334155; font-size: 0.95rem; line-height: 1.5;">
+                {description}
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
 import pandas as pd
 from supabase import create_client, Client
 import pydeck as pdk

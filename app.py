@@ -1,4 +1,5 @@
 import streamlit as st
+import html as _html
 def inject_lovable_styles():
     st.markdown("""
         <style>
@@ -69,14 +70,14 @@ def draw_referral_card(role, company, user, description):
     st.markdown(f"""
         <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-weight: 700; font-size: 1.1rem; color: #0f172a;">{role}</span>
-                <span style="background: #eef2ff; color: #4f46e5; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">{company}</span>
+                <span style="font-weight: 700; font-size: 1.1rem; color: #0f172a;">{_html.escape(str(role))}</span>
+                <span style="background: #eef2ff; color: #4f46e5; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">{_html.escape(str(company))}</span>
             </div>
             <div style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">
-                Posted by <b>{user}</b>
+                Posted by <b>{_html.escape(str(user))}</b>
             </div>
             <div style="color: #334155; font-size: 0.95rem; line-height: 1.5;">
-                {description}
+                {_html.escape(str(description))}
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -185,11 +186,11 @@ elif choice == "Referral Marketplace":
             st.markdown(f"""
             <div class="card">
                 <div style="display: flex; justify-content: space-between;">
-                    <h3>{ref['role']}</h3>
-                    <span style="color: #4f46e5; font-weight: bold;">{ref['company']}</span>
+                    <h3>{_html.escape(str(ref.get('role', '')))}</h3>
+                    <span style="color: #4f46e5; font-weight: bold;">{_html.escape(str(ref.get('company', '')))}</span>
                 </div>
-                <p style="color: #6b7280;"><b>Posted by:</b> {ref['posted_by']}</p>
-                <p>{ref['description']}</p>
+                <p style="color: #6b7280;"><b>Posted by:</b> {_html.escape(str(ref.get('posted_by', '')))}</p>
+                <p>{_html.escape(str(ref.get('description', '')))}</p>
             </div>
             """, unsafe_allow_html=True)
             if st.button("Apply with Intent Note", key=ref['id']):

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Send, CheckCircle2, Clock, MapPin } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { RequireAuth } from "@/components/RequireAuth";
 import { ALUMNI, OPPORTUNITIES, CITIES } from "@/lib/mockData";
 
 export const Route = createFileRoute("/referrals")({
@@ -15,7 +16,11 @@ export const Route = createFileRoute("/referrals")({
       { property: "og:description", content: "Real referrals from real alumni — transparent and trackable." },
     ],
   }),
-  component: Referrals,
+  component: () => (
+    <RequireAuth feature="the Referral Marketplace">
+      <Referrals />
+    </RequireAuth>
+  ),
 });
 
 type Status = "open" | "applied" | "shortlisted";

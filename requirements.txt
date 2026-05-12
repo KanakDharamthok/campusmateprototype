@@ -1,6 +1,6 @@
 streamlit
-firebase-admin
-pandas
-plotly
-pydeck
 supabase
+pandas
+pydeck
+streamlit-extras
+streamlit-shadcn-ui

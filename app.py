@@ -1,4 +1,5 @@
 import streamlit as st
+import html as _html
 def inject_lovable_styles():
     st.markdown("""
         <style>

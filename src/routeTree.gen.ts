@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrendsRouteImport } from './routes/trends'
 import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReferralsRouteImport } from './routes/referrals'
 import { Route as OfficeHoursRouteImport } from './routes/office-hours'
 import { Route as MentorsRouteImport } from './routes/mentors'
@@ -30,6 +31,11 @@ const TrendsRoute = TrendsRouteImport.update({
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReferralsRoute = ReferralsRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/mentors': typeof MentorsRoute
   '/office-hours': typeof OfficeHoursRoute
   '/referrals': typeof ReferralsRoute
+  '/settings': typeof SettingsRoute
   '/stories': typeof StoriesRoute
   '/trends': typeof TrendsRoute
 }
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/mentors': typeof MentorsRoute
   '/office-hours': typeof OfficeHoursRoute
   '/referrals': typeof ReferralsRoute
+  '/settings': typeof SettingsRoute
   '/stories': typeof StoriesRoute
   '/trends': typeof TrendsRoute
 }
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/mentors': typeof MentorsRoute
   '/office-hours': typeof OfficeHoursRoute
   '/referrals': typeof ReferralsRoute
+  '/settings': typeof SettingsRoute
   '/stories': typeof StoriesRoute
   '/trends': typeof TrendsRoute
 }
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/mentors'
     | '/office-hours'
     | '/referrals'
+    | '/settings'
     | '/stories'
     | '/trends'
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/mentors'
     | '/office-hours'
     | '/referrals'
+    | '/settings'
     | '/stories'
     | '/trends'
   id:
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/mentors'
     | '/office-hours'
     | '/referrals'
+    | '/settings'
     | '/stories'
     | '/trends'
   fileRoutesById: FileRoutesById
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   MentorsRoute: typeof MentorsRoute
   OfficeHoursRoute: typeof OfficeHoursRoute
   ReferralsRoute: typeof ReferralsRoute
+  SettingsRoute: typeof SettingsRoute
   StoriesRoute: typeof StoriesRoute
   TrendsRoute: typeof TrendsRoute
 }
@@ -200,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/stories'
       fullPath: '/stories'
       preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/referrals': {
@@ -286,9 +306,19 @@ const rootRouteChildren: RootRouteChildren = {
   MentorsRoute: MentorsRoute,
   OfficeHoursRoute: OfficeHoursRoute,
   ReferralsRoute: ReferralsRoute,
+  SettingsRoute: SettingsRoute,
   StoriesRoute: StoriesRoute,
   TrendsRoute: TrendsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

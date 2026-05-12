@@ -186,11 +186,11 @@ elif choice == "Referral Marketplace":
             st.markdown(f"""
             <div class="card">
                 <div style="display: flex; justify-content: space-between;">
-                    <h3>{ref['role']}</h3>
-                    <span style="color: #4f46e5; font-weight: bold;">{ref['company']}</span>
+                    <h3>{_html.escape(str(ref.get('role', '')))}</h3>
+                    <span style="color: #4f46e5; font-weight: bold;">{_html.escape(str(ref.get('company', '')))}</span>
                 </div>
-                <p style="color: #6b7280;"><b>Posted by:</b> {ref['posted_by']}</p>
-                <p>{ref['description']}</p>
+                <p style="color: #6b7280;"><b>Posted by:</b> {_html.escape(str(ref.get('posted_by', '')))}</p>
+                <p>{_html.escape(str(ref.get('description', '')))}</p>
             </div>
             """, unsafe_allow_html=True)
             if st.button("Apply with Intent Note", key=ref['id']):

@@ -1,4 +1,69 @@
 import streamlit as st
+def inject_lovable_styles():
+    st.markdown("""
+        <style>
+        /* Import Inter font to match modern UI */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        html, body, [class*="st-at"] {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfd;
+        }
+
+        /* Main Container Styling */
+        .main {
+            background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+        }
+
+        /* Replicating shadcn/ui Cards */
+        .stMarkdown div[data-testid="stMarkdownContainer"] .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        /* Primary Button Styling (Lovable Indigo) */
+        div.stButton > button:first-child {
+            background-color: #4f46e5;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 500;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        div.stButton > button:hover {
+            background-color: #4338ca;
+            color: white;
+            border: none;
+        }
+
+        /* Sidebar Styling */
+        section[data-testid="stSidebar"] {
+            background-color: #ffffff;
+            border-right: 1px solid #f1f5f9;
+        }
+        
+        /* Metric Styling */
+        [data-testid="stMetricValue"] {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+inject_lovable_styles()
 import pandas as pd
 from supabase import create_client, Client
 import pydeck as pdk

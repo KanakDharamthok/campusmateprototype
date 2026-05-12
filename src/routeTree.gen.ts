@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrendsRouteImport } from './routes/trends'
 import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReferralsRouteImport } from './routes/referrals'
 import { Route as OfficeHoursRouteImport } from './routes/office-hours'
 import { Route as MentorsRouteImport } from './routes/mentors'
@@ -19,6 +20,7 @@ import { Route as HeatmapRouteImport } from './routes/heatmap'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ChallengesRouteImport } from './routes/challenges'
 import { Route as CareerGpsRouteImport } from './routes/career-gps'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TrendsRoute = TrendsRouteImport.update({
@@ -29,6 +31,11 @@ const TrendsRoute = TrendsRouteImport.update({
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
   path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReferralsRoute = ReferralsRouteImport.update({
@@ -71,6 +78,11 @@ const CareerGpsRoute = CareerGpsRouteImport.update({
   path: '/career-gps',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -79,6 +91,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/career-gps': typeof CareerGpsRoute
   '/challenges': typeof ChallengesRoute
   '/community': typeof CommunityRoute
@@ -87,11 +100,13 @@ export interface FileRoutesByFullPath {
   '/mentors': typeof MentorsRoute
   '/office-hours': typeof OfficeHoursRoute
   '/referrals': typeof ReferralsRoute
+  '/settings': typeof SettingsRoute
   '/stories': typeof StoriesRoute
   '/trends': typeof TrendsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/career-gps': typeof CareerGpsRoute
   '/challenges': typeof ChallengesRoute
   '/community': typeof CommunityRoute
@@ -100,12 +115,14 @@ export interface FileRoutesByTo {
   '/mentors': typeof MentorsRoute
   '/office-hours': typeof OfficeHoursRoute
   '/referrals': typeof ReferralsRoute
+  '/settings': typeof SettingsRoute
   '/stories': typeof StoriesRoute
   '/trends': typeof TrendsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/career-gps': typeof CareerGpsRoute
   '/challenges': typeof ChallengesRoute
   '/community': typeof CommunityRoute
@@ -114,6 +131,7 @@ export interface FileRoutesById {
   '/mentors': typeof MentorsRoute
   '/office-hours': typeof OfficeHoursRoute
   '/referrals': typeof ReferralsRoute
+  '/settings': typeof SettingsRoute
   '/stories': typeof StoriesRoute
   '/trends': typeof TrendsRoute
 }
@@ -121,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/career-gps'
     | '/challenges'
     | '/community'
@@ -129,11 +148,13 @@ export interface FileRouteTypes {
     | '/mentors'
     | '/office-hours'
     | '/referrals'
+    | '/settings'
     | '/stories'
     | '/trends'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/career-gps'
     | '/challenges'
     | '/community'
@@ -142,11 +163,13 @@ export interface FileRouteTypes {
     | '/mentors'
     | '/office-hours'
     | '/referrals'
+    | '/settings'
     | '/stories'
     | '/trends'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/career-gps'
     | '/challenges'
     | '/community'
@@ -155,12 +178,14 @@ export interface FileRouteTypes {
     | '/mentors'
     | '/office-hours'
     | '/referrals'
+    | '/settings'
     | '/stories'
     | '/trends'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   CareerGpsRoute: typeof CareerGpsRoute
   ChallengesRoute: typeof ChallengesRoute
   CommunityRoute: typeof CommunityRoute
@@ -169,6 +194,7 @@ export interface RootRouteChildren {
   MentorsRoute: typeof MentorsRoute
   OfficeHoursRoute: typeof OfficeHoursRoute
   ReferralsRoute: typeof ReferralsRoute
+  SettingsRoute: typeof SettingsRoute
   StoriesRoute: typeof StoriesRoute
   TrendsRoute: typeof TrendsRoute
 }
@@ -187,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/stories'
       fullPath: '/stories'
       preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/referrals': {
@@ -245,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareerGpsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -257,6 +297,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   CareerGpsRoute: CareerGpsRoute,
   ChallengesRoute: ChallengesRoute,
   CommunityRoute: CommunityRoute,
@@ -265,6 +306,7 @@ const rootRouteChildren: RootRouteChildren = {
   MentorsRoute: MentorsRoute,
   OfficeHoursRoute: OfficeHoursRoute,
   ReferralsRoute: ReferralsRoute,
+  SettingsRoute: SettingsRoute,
   StoriesRoute: StoriesRoute,
   TrendsRoute: TrendsRoute,
 }

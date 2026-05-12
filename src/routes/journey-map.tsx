@@ -5,6 +5,7 @@ import { Briefcase, MapPin, Calendar } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WorldMap } from "@/components/IndiaMap";
+import { RequireAuth } from "@/components/RequireAuth";
 import { ALUMNI, CITIES, type Alumni } from "@/lib/mockData";
 
 export const Route = createFileRoute("/journey-map")({
@@ -16,7 +17,11 @@ export const Route = createFileRoute("/journey-map")({
       { property: "og:description", content: "Trace alumni journeys city by city, year by year." },
     ],
   }),
-  component: JourneyMap,
+  component: () => (
+    <RequireAuth feature="the Career Journey Map">
+      <JourneyMap />
+    </RequireAuth>
+  ),
 });
 
 function JourneyMap() {

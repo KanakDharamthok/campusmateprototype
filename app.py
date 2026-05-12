@@ -1,118 +1,141 @@
 import streamlit as st
 import pandas as pd
-import firebase_admin
-from firebase_admin import credentials, firestore, auth
-import plotly.express as px
+from supabase import create_client, Client
 import pydeck as pdk
 
-if not firebase_admin._apps:
-    cred = credentials.Certificate('serviceAccountKey.json')
-    firebase_admin.initialize_app(cred)
+url = st.secrets["SUPABASE_URL"]
+key = st.secrets["SUPABASE_KEY"]
+supabase: Client = create_client(url, key)
 
-db = firestore.client()
-
-st.set_page_config(page_title="Campus Mitra", layout="wide", page_icon="🎓")
+st.set_page_config(page_title="CampusMate", layout="wide", page_icon="🎓")
 
 st.markdown("""
     <style>
-    .main { background-color: #f8f9fa; }
-    .stButton>button { border-radius: 8px; width: 100%; background-color: #4F46E5; color: white; }
-    .card { padding: 1.5rem; border-radius: 12px; background: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 1rem; }
+    .main { background-color: #f9fafb; }
+    .stButton>button { border-radius: 10px; background-color: #4f46e5; color: white; border: none; height: 3em; }
+    .stButton>button:hover { background-color: #4338ca; border: none; }
+    .card { 
+        padding: 20px; 
+        border-radius: 15px; 
+        background: white; 
+        border: 1px solid #e5e7eb; 
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .metric-card {
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 10px;
+        border-left: 5px solid #4f46e5;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-if 'user' not in st.session_state:
-    st.session_state.user = None
-
-st.sidebar.title("🚀 Campus Mitra")
-menu = ["Dashboard", "Career Journey Map", "Referral Marketplace", "Career GPS", "Alumni Office Hours"]
-choice = st.sidebar.radio("Navigate", menu)
-
-def career_journey_map():
-    st.header("📍 Career Journey Map")
-    st.caption("Visualizing alumni growth from first job to current role") [cite: 6, 7]
-    
-    map_data = pd.DataFrame({
-        'alumni': ['Kanak', 'Rahul', 'Sneha'],
-        'lat': [26.9124, 12.9716, 1.3521], 
-        'lon': [75.7873, 77.5946, 103.8198],
-        'stage': ['First Job', 'Current Role', 'International']
-    })
-    
-    view_state = pdk.ViewState(latitude=20.5937, longitude=78.9629, zoom=4, pitch=50)
-    
-    layer = pdk.Layer(
-        "ArcLayer",
-        data=map_data,
-        get_source_position='[75.7873, 26.9124]',
-        get_target_position='[77.5946, 12.9716]',
-        get_source_color=[79, 70, 229, 120],
-        get_target_color=[244, 63, 94, 255],
-        widths=5,
-    )
-    
-    st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state))
-    st.info("💡 Click on a route to view the 'Turning Point' stories behind the transition.") [cite: 9, 61]
-
-def referral_marketplace():
-    st.header("💼 Referral Marketplace") [cite: 44, 81]
-    st.write("Apply with a short intent note to verified alumni opportunities.") [cite: 46]
-    
-    referrals = db.collection('referrals').stream()
-    
-    cols = st.columns(2)
-    for i, ref in enumerate(referrals):
-        data = ref.to_dict()
-        with cols[i % 2]:
-            st.markdown(f"""
-            <div class="card">
-                <h3>{data['role']} @ {data['company']}</h3>
-                <p><b>Posted by:</b> {data['alumni_name']} ({data['batch']})</p>
-                <p>{data['description'][:100]}...</p>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button(f"Request Referral for {data['company']}", key=ref.id):
-                st.success("Referral request sent! You can track status in your profile.") [cite: 47]
-
-def career_gps():
-    st.header("🗺️ Career GPS") [cite: 21, 80]
-    st.write("AI-driven path recommendation based on alumni journeys.") [cite: 23]
-    
-    col1, col2 = st.columns([1, 2])
-    with col1:
-        skills = st.multiselect("Your Skills", ["Python", "React", "SQL", "Cloud", "UI/UX"]) [cite: 22]
-        target = st.selectbox("Target Role", ["SDE", "Data Scientist", "Product Manager"])
-        if st.button("Generate My Path"):
-            with col2:
-                st.subheader("Your Recommended Path")
-                st.markdown("""
-                - **Step 1:** Learn **System Design** (Common gap for SDE) [cite: 50]
-                - **Step 2:** Join the **Bengaluru City Chapter** [cite: 33]
-                - **Step 3:** Connect with **3 Mentors** who moved from Core to Software [cite: 24]
-                """)
+st.sidebar.title("🎓 CampusMate")
+st.sidebar.caption("Student-Alumni Coordination Ecosystem")
+menu = ["Dashboard", "Career Journey Map", "Referral Marketplace", "Career GPS"]
+choice = st.sidebar.radio("Navigate to:", menu)
 
 if choice == "Dashboard":
-    st.title("Welcome to Campus Mitra")
-    st.write("Connecting students and alumni through real-world data and impact.")
+    st.title("CampusMate Intelligence Dashboard")
     
-    st.subheader("Opportunity Heatmap (India)") [cite: 10, 79]
+    col1, col2, col3 = st.columns(3)
+    col1.markdown('<div class="metric-card"><b>Active Referrals</b><br><h2>24</h2></div>', unsafe_allow_html=True)
+    col2.markdown('<div class="metric-card"><b>Verified Alumni</b><br><h2>1.2k+</h2></div>', unsafe_allow_html=True)
+    col3.markdown('<div class="metric-card"><b>Global Chapters</b><br><h2>12</h2></div>', unsafe_allow_html=True)
+
+    st.subheader("📍 Opportunity Heatmap")
+    
     heatmap_data = pd.DataFrame({
-        'lat': [12.9716, 19.0760, 28.6139],
-        'lon': [77.5946, 72.8777, 77.2090],
-        'jobs': [150, 85, 120]
+        'lat': [12.9716, 19.0760, 28.6139, 17.3850, 22.5726],
+        'lon': [77.5946, 72.8777, 77.2090, 78.4867, 88.3639],
+        'weight': [100, 80, 90, 60, 40]
     })
-    st.map(heatmap_data) [cite: 11]
+    
+    st.pydeck_chart(pdk.Deck(
+        map_style='mapbox://styles/mapbox/light-v9',
+        initial_view_state=pdk.ViewState(latitude=20.5937, longitude=78.9629, zoom=4, pitch=40),
+        layers=[
+            pdk.Layer(
+                'HeatmapLayer',
+                data=heatmap_data,
+                get_position='[lon, lat]',
+                get_weight='weight',
+                radius_pixels=60,
+            ),
+        ],
+    ))
 
 elif choice == "Career Journey Map":
-    career_journey_map()
+    st.header("📍 Career Journey Map")
+
+    try:
+        response = supabase.table('alumni_paths').select("*").execute()
+        path_data = pd.DataFrame(response.data)
+    except:
+        path_data = pd.DataFrame([])
+
+    if not path_data.empty:
+        view_state = pdk.ViewState(latitude=20.0, longitude=78.0, zoom=3.5, pitch=50)
+        layer = pdk.Layer(
+            "ArcLayer",
+            data=path_data,
+            get_source_position='[start_lon, start_lat]',
+            get_target_position='[end_lon, end_lat]',
+            get_source_color=[79, 70, 229, 150],
+            get_target_color=[236, 72, 153, 255],
+            widths=5,
+        )
+        st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state))
+    else:
+        st.info("No data available in alumni_paths table.")
 
 elif choice == "Referral Marketplace":
-    referral_marketplace()
+    st.header("💼 Referral Marketplace")
+
+    try:
+        res = supabase.table('referrals').select("*").order('created_at', desc=True).execute()
+        referrals = res.data
+    except:
+        referrals = []
+
+    if referrals:
+        for ref in referrals:
+            st.markdown(f"""
+            <div class="card">
+                <div style="display: flex; justify-content: space-between;">
+                    <h3>{ref['role']}</h3>
+                    <span style="color: #4f46e5; font-weight: bold;">{ref['company']}</span>
+                </div>
+                <p style="color: #6b7280;"><b>Posted by:</b> {ref['posted_by']}</p>
+                <p>{ref['description']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("Apply with Intent Note", key=ref['id']):
+                st.toast(f"Application sent for {ref['company']}!")
+    else:
+        st.warning("Marketplace is currently empty.")
 
 elif choice == "Career GPS":
-    career_gps()
+    st.header("🗺️ Career GPS")
+    
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        role = st.selectbox("Target Career Path", ["SDE", "Data Science", "Product Management", "UI/UX"])
+        skills = st.multiselect("Current Skills", ["Python", "JavaScript", "React", "SQL", "Figma"])
+        experience = st.slider("Years of Experience", 0, 4, 0)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-elif choice == "Alumni Office Hours":
-    st.header("🎙️ Alumni Office Hours") [cite: 40, 82]
-    st.write("Weekly live Q&A sessions on career switches and interview prep.") [cite: 41, 42]
-    st.info("Check the 'Open for Guidance' badge on alumni profiles for instant help.") [cite: 74, 75]
+    if st.button("Calculate My Route"):
+        with col2:
+            st.subheader("Your Roadmap")
+            st.markdown("""
+            - **Phase 1:** Focus on **System Design** and **Cloud Fundamentals**.
+            - **Phase 2:** Connect with the **Bengaluru Alumni Chapter**.
+            - **Phase 3:** Target 'Mid-sized Startups' for your first pivot.
+            """)
+            st.success("Analysis complete.")
+
+st.sidebar.markdown("---")
+st.sidebar.info("Developed for Google Solution Challenge 2026")

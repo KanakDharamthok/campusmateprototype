@@ -70,14 +70,14 @@ def draw_referral_card(role, company, user, description):
     st.markdown(f"""
         <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-weight: 700; font-size: 1.1rem; color: #0f172a;">{role}</span>
-                <span style="background: #eef2ff; color: #4f46e5; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">{company}</span>
+                <span style="font-weight: 700; font-size: 1.1rem; color: #0f172a;">{_html.escape(str(role))}</span>
+                <span style="background: #eef2ff; color: #4f46e5; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">{_html.escape(str(company))}</span>
             </div>
             <div style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">
-                Posted by <b>{user}</b>
+                Posted by <b>{_html.escape(str(user))}</b>
             </div>
             <div style="color: #334155; font-size: 0.95rem; line-height: 1.5;">
-                {description}
+                {_html.escape(str(description))}
             </div>
         </div>
     """, unsafe_allow_html=True)
